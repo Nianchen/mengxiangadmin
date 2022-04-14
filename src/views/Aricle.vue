@@ -1,11 +1,12 @@
 <template>
+<div> <a-button>add</a-button>
   <a-table :columns="columns" :data-source="dataSource" bordered>
     <template #bodyCell="{ column, text, record }">
       <template v-if="['name', 'age', 'address'].includes(column.dataIndex)">
         <div>
           <a-input
             v-if="editableData[record.key]"
-            v-model:value="editableData[record.key][column.dataIndex]"
+            :model:value="editableData[record.key][column.dataIndex]"
             style="margin: -5px 0"
           />
           <template v-else>
@@ -28,34 +29,38 @@
       </template>
     </template>
   </a-table>
+
+</div>
+   
 </template>
 <script>
 import { cloneDeep } from 'lodash-es';
 import { defineComponent, reactive, ref } from 'vue';
 const columns = [{
-  title: 'name',
-  dataIndex: 'name',
+  title: '标题',
+  dataIndex: 'title',
   width: '25%',
 }, {
-  title: 'age',
-  dataIndex: 'age',
+  title: '作者',
+  dataIndex: 'author',
   width: '15%',
 }, {
-  title: 'address',
-  dataIndex: 'address',
+  title: '点赞数',
+  dataIndex: 'number',
   width: '40%',
-}, {
+},{
   title: 'operation',
   dataIndex: 'operation',
-}];
+}
+];
 const data = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 20; i++) {
   data.push({
     key: i.toString(),
-    name: `Edrward ${i}`,
-    age: 32,
-    address: `London Park no. ${i}`,
+    title: `Edrward ${i}`,
+    number: 32,
+    author: `London Park no. ${i}`,
   });
 }
 

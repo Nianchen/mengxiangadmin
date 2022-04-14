@@ -6,13 +6,22 @@ const routes = [
         path:'/',
         redirect:'Yibiao'
     },
+  
     {
-        path:'/Yibiao',
+        path:'/home/Yibiao',
         component:()=> import('../views/YiBiao.vue')
     },
     {
-        path:"/User",
+        path:"/home/User",
         component:()=>import("../views/User.vue")
+    },
+    {
+        path:"/home/Aricle",
+        component:()=>import("../views/Aricle.vue")
+    },
+    {
+        path:"/home/Notice",
+        component:()=>import("../views/Notice.vue")
     }
 ]
 
