@@ -23,75 +23,81 @@
       <img class="img2019" src="../images/2019.jpg" alt="" />
       <div style="margin: 20px 0"></div>
       <div class="formDiv" style="">
-      
-          <a-form
-    :model="formState"
-    name="basic"
-    :label-col="{ span: 8 }"
-    :wrapper-col="{ span: 16 }"
-    autocomplete="off"
-    @finish="onFinish"
-    @finishFailed="onFinishFailed"
-  >
-    <a-form-item
-      label="Username"
-      name="username"
-      :rules="[{ required: true, message: 'Please input your username!' }]"
-    >
-      <a-input v-model:value="formState.username" />
-    </a-form-item>
+        <a-form
+          :model="formState"
+          name="basic"
+          :label-col="{ span: 8 }"
+          :wrapper-col="{ span: 16 }"
+          autocomplete="off"
+        >
+          <a-form-item
+            label="Username"
+            name="username"
+            :rules="[
+              { required: true, message: 'Please input your username!' },
+            ]"
+          >
+            <a-input v-model:value="formState.username" />
+          </a-form-item>
 
-    <a-form-item
-      label="Password"
-      name="password"
-      :rules="[{ required: true, message: 'Please input your password!' }]"
-    >
-      <a-input-password v-model:value="formState.password" />
-    </a-form-item>
+          <a-form-item
+            label="Password"
+            name="password"
+            :rules="[
+              { required: true, message: 'Please input your password!' },
+            ]"
+          >
+            <a-input-password v-model:value="formState.password" />
+          </a-form-item>
 
-    <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
-      <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
-    </a-form-item>
+          <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
+            <a-checkbox v-model:checked="formState.remember"
+              >Remember me</a-checkbox
+            >
+          </a-form-item>
 
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" html-type="submit">Submit</a-button>
-    </a-form-item>
-  </a-form>
+          <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+            <a-button type="primary" html-type="submit" @click="cLogin"
+              >Submit</a-button
+            >
+          </a-form-item>
+        </a-form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { getUser } from "../network/api.js";
+// import {userTextStore} from '../store/index'
 export default defineComponent({
   setup() {
+    // const userstroe = userTextStore()
     const formState = reactive({
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       remember: true,
     });
-    const router =useRouter()
-    const onFinish = values => {
-      console.log('Success:', values);
-      router.push({
-        path:"/home/Yibiao"
-      })
-    };
-
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
+    const router = useRouter();
+    const cLogin = () => {
+      getUser().then((res) => {
+        res.data.forEach((item) => {
+          if (item.username == formState.username) {
+            router.push({
+              path: "/home/Yibiao",
+            });
+          }
+        });
+      });
     };
 
     return {
       formState,
-      onFinish,
-      onFinishFailed,
+      cLogin,
     };
   },
-
 });
 </script>
 
@@ -120,7 +126,6 @@ export default defineComponent({
   background-color: white;
   width: 500px;
   height: 600px;
-
 }
 
 .img2019 {
@@ -133,7 +138,4 @@ export default defineComponent({
 
   width: 100%;
 }
-
-
-
 </style>

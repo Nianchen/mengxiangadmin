@@ -5,6 +5,32 @@
       "password": "admin123",
       "token": "admin",
       "id": 0
+    },
+    {
+      "username": "admin1",
+      "password": "admin1",
+      "token": "admin1",
+      "id": 1
+    },
+    {
+      "username": "test1",
+      "password": "admin1",
+      "id": 2
+    },
+    {
+      "username": "test2",
+      "password": "admin1",
+      "id": 3
+    },
+    {
+      "username": "123",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "username": "2",
+      "password": "2",
+      "id": 5
     }
   ],
   "wenzhang": [

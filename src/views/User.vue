@@ -46,7 +46,7 @@
 import { cloneDeep } from "lodash-es";
 import { reactive } from "vue";
 import { getUser } from "../../../vue-axios/network/user";
-import { changeUser, delUser } from "../network/api";
+import { changeUser, delUser,addUser} from "../network/api";
 import { ref } from "vue";
 export default {
   setup() {
@@ -56,8 +56,15 @@ export default {
     const showModal = () => {
       visible.value = true;
     };
-       const handleOk = e => {
-      console.log(e);
+       const handleOk = () => {
+      let newUser = {
+        username : inputname.value,
+        password : inputword.value
+      }
+      dataSource.push(newUser)
+      addUser(dataSource.length-1,newUser)
+      inputname.value=''
+      inputword.value=''
       visible.value = false;
     };
 

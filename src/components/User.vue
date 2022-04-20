@@ -1,27 +1,29 @@
 <template>
-<div>
-    <a-popconfirm title="Are you sure？" ok-text="Yes" cancel-text="No">
-      <a-avatar :size="40">
-    <template #icon>
-      <AntDesignOutlined />
-    </template>
-  </a-avatar>
-  </a-popconfirm>
-   
-</div>
-
+  <div>
+    <a-popconfirm title="点击退出？" ok-text="Yes" cancel-text="No">
+      <span class="id">{{ username }}</span>
+    </a-popconfirm>
+  </div>
 </template>
 <script>
-import { AntDesignOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
+import { ref } from "vue";
 export default defineComponent({
-  components: {
-    AntDesignOutlined,
+  components: {},
+  setup() {
+    const username = ref("");
+    console.log(document.cookie);
+    username.value = document.cookie.split("=")[1];
+    return {
+      username,
+    };
   },
 });
 </script>
 <style  scoped>
-    span{
-        color:white
-    }
+.id {
+  color: white;
+  font-size: 25px;
+  padding: 5px;
+}
 </style>

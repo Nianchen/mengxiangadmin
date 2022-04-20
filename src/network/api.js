@@ -5,35 +5,47 @@ export function getWen() {
         url: "/wenzhang"
     })
 }
-
 export function getUser() {
     return request({
         url: "/user"
     })
 }
-export function addUser(id,data){
+export function addUser(id, newUser) {
+    let data = {
+        username: newUser.username,
+        password: newUser.password,
+        id
+    }
     return request({
-        method:'post',
-        url:"/user?id="+id,
+        method: 'post',
+        url: "/user?id=" + id,
         data
     })
 }
-export function delUser(id){
+export function delUser(id) {
     return request({
-        method:"delete",
-        url:"/user/"+id
+        method: "delete",
+        url: "/user/" + id
     })
 }
+
 export function changeUser(id, canshu) {
     let data = {
         username: canshu.username,
         password: canshu.password,
-        token:canshu.token
+        token: canshu.token
     }
-    console.log(data);
     return request({
         method: "put",
         url: "/user/" + id,
         data
+    })
+}
+
+export function Login() {
+  
+    return request({
+        method: "get",
+        url: "/user"
     })
 }
